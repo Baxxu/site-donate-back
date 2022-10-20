@@ -2,7 +2,6 @@ package refreshtoken
 
 import (
 	"errors"
-	"github.com/Baxxu/site-donate-back/sql"
 	"log"
 )
 
@@ -12,8 +11,6 @@ const (
 )
 
 var (
-	DataBase sql.DataBase
-
 	ErrInvalid = errors.New("error refresh token invalid")
 )
 

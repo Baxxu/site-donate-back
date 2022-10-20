@@ -2,11 +2,12 @@ package refreshtoken
 
 import (
 	"context"
+	"github.com/Baxxu/site-donate-back/sql"
 	"log"
 )
 
 func DeleteAll(token []byte) (err error) {
-	_, err = DataBase.Pool.Exec(context.Background(),
+	_, err = sql.DataBase.Pool.Exec(context.Background(),
 		`delete
 from sessions
 where user_id in (select user_id

@@ -1,14 +1,9 @@
 package main
 
 import (
-	"fmt"
-	"github.com/Baxxu/site-donate-back/accesstoken"
 	"github.com/Baxxu/site-donate-back/api"
 	"github.com/Baxxu/site-donate-back/auth"
-	"github.com/Baxxu/site-donate-back/keys"
-	"github.com/Baxxu/site-donate-back/refreshtoken"
-	"github.com/Baxxu/site-donate-back/sessionid"
-	"github.com/Baxxu/site-donate-back/sql"
+	. "github.com/Baxxu/site-donate-back/sql"
 	"log"
 	"net/http"
 	"time"
@@ -18,29 +13,12 @@ import (
 
 // TODO если у пользователя больше 100 сессий, то удалять все и добавлять новую
 
-var (
-	Client = http.Client{
-		Timeout: time.Second * 90,
-	}
-
-	DataBase = sql.DataBase{}
-)
-
 func init() {
 	log.SetFlags(log.LstdFlags | log.Llongfile)
 }
 
 func main() {
-	DataBase.Connect(keys.DataBaseUrl)
 	defer DataBase.Pool.Close()
-
-	sessionid.DataBase = DataBase
-	refreshtoken.DataBase = DataBase
-	accesstoken.DataBase = DataBase
-
-	auth.DataBase = DataBase
-
-	api.Client = &Client
 
 	mux := http.NewServeMux()
 
@@ -67,9 +45,11 @@ func main() {
 	}
 }
 
+/*
 func timer(name string) func() {
 	start := time.Now()
 	return func() {
 		fmt.Printf("%s took %v\n", name, time.Since(start))
 	}
 }
+*/

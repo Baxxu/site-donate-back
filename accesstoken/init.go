@@ -2,7 +2,6 @@ package accesstoken
 
 import (
 	"errors"
-	"github.com/Baxxu/site-donate-back/sql"
 	"log"
 )
 
@@ -12,8 +11,6 @@ const (
 )
 
 var (
-	DataBase sql.DataBase
-
 	ErrParsing = errors.New("error parsing assess token")
 
 	ErrInvalid = errors.New("error access token invalid")

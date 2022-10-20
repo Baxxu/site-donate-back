@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/hex"
+	"github.com/Baxxu/site-donate-back/sql"
 	"github.com/jackc/pgx/v5"
 	"log"
 	"strconv"
@@ -62,7 +63,7 @@ func Validate(tokenRaw string) (err error) {
 	// todo можно менять last_access_time и здесь тоже
 	//проверяем
 	var privateKey []byte
-	err = DataBase.Pool.QueryRow(context.Background(),
+	err = sql.DataBase.Pool.QueryRow(context.Background(),
 		`select private_key from sessions where id = $1;`,
 		tokenFromClient.sessionId).
 		Scan(&privateKey)

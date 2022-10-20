@@ -11,6 +11,7 @@ import (
 	"github.com/Baxxu/site-donate-back/keys"
 	"github.com/Baxxu/site-donate-back/refreshtoken"
 	"github.com/Baxxu/site-donate-back/sessionid"
+	"github.com/Baxxu/site-donate-back/sql"
 	"log"
 	"net/http"
 	"sort"
@@ -93,7 +94,7 @@ func Telegram(writer http.ResponseWriter, request *http.Request) {
 
 	//user_id
 	var userId int
-	err = DataBase.Pool.QueryRow(context.Background(),
+	err = sql.DataBase.Pool.QueryRow(context.Background(),
 		`select get_user_id_with_telegram_id($1);`,
 		telegramId).
 		Scan(&userId)

@@ -3,6 +3,7 @@ package sessionid
 import (
 	"context"
 	"crypto/rand"
+	"github.com/Baxxu/site-donate-back/sql"
 	"log"
 	mathRand "math/rand"
 	"time"
@@ -32,7 +33,7 @@ func New(userId int) (sessionId, privateKey, refreshToken []byte, err error) {
 
 	timeNow := time.Now().Unix()
 
-	_, err = DataBase.Pool.Exec(context.Background(),
+	_, err = sql.DataBase.Pool.Exec(context.Background(),
 		`insert into sessions (id,
                       user_id,
                       private_key,

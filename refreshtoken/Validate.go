@@ -2,6 +2,7 @@ package refreshtoken
 
 import (
 	"context"
+	"github.com/Baxxu/site-donate-back/sql"
 	"log"
 	"time"
 )
@@ -19,7 +20,7 @@ func Validate(token []byte) (sessionId []byte, userId int, privateKey []byte, er
 	var userIdTmp *int
 	var privateKeyTmp *[]byte
 	var ok bool
-	err = DataBase.Pool.QueryRow(context.Background(),
+	err = sql.DataBase.Pool.QueryRow(context.Background(),
 		`select id, user_id, private_key, ok from refresh_token_validate($1,$2,$3) as (id bytea, user_id bigint, private_key bytea, ok boolean)`,
 		token, timeNow.Unix(), timeNow.AddDate(-1, 0, 0).Unix()).
 		Scan(&sessionIdTmp, &userIdTmp, &privateKeyTmp, &ok)
