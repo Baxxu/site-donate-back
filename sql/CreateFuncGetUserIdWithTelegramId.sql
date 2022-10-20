@@ -10,7 +10,6 @@ begin
     if var_user_id IS NULL then
         insert into users (telegram_id)
         values (var_telegram_id)
-        on conflict (telegram_id) do nothing
         RETURNING id Into var_user_id;
     end if;
     return var_user_id;
