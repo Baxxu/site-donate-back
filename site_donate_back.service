@@ -1,0 +1,14 @@
+[Unit]
+Description=site_donate_back
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+ExecStartPre=/bin/sleep 5
+TimeoutSec=60
+WorkingDirectory=/home/test
+ExecStart=/home/test/site_donate_back
+
+[Install]
+WantedBy=multi-user.target
